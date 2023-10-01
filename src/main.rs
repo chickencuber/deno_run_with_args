@@ -10,10 +10,5 @@ fn main() {
     let mut cmd = Command::new("cmd");
     cmd.arg("/C").arg("deno").arg("run").arg("--allow-all").arg("--unstable").arg("main.ts").arg(current_dir).args(deno_script_args).current_dir(file);
 
-    let status = cmd.status().expect("Failed to start Deno script");
-
-    // The Rust program terminates here
-    if !status.success() {
-        eprintln!("Command exited with an error");
-    }
+    let _ = cmd.status().expect("Failed to start Deno script");
 }
