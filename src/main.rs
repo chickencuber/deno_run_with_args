@@ -8,6 +8,12 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let deno_script_args: Vec<&str> = args[1..].iter().map(|s| s.as_str()).collect();
     let mut cmd = Command::new("cmd");
-    cmd.arg("/c").arg("start").arg("cmd").arg("/c").arg("deno").arg("run").arg("--allow-all").arg("--unstable").arg("main.ts").arg(current_dir).args(deno_script_args).current_dir(file);
+    cmd.arg("/c").arg("deno").arg("run").arg("--allow-all").arg("--unstable").arg("main.ts").arg(current_dir).args(deno_script_args).current_dir(file);
     let _ = cmd.spawn();
+
+    let status = cmd.status().expect("Failed to run command");
+    if !status.success() {
+        eprintln!("Command exited with an error");
+    }
+
 }
