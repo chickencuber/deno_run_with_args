@@ -2,7 +2,7 @@ use std::env;
 use std::process::Command;
 fn main() {
     let mut file = env::current_exe().unwrap();
-    let current_dir = env::current_dir().unwrap();
+    let current_dir = env::current_dir().unwrap().to_str().unwrap().to_string();
     file.pop();
     file.push("Deno Run");
     let args: Vec<String> = env::args().collect();
